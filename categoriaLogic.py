@@ -28,3 +28,9 @@ class CategoriaLogic(Logic):
         sql = f"delete from fishingdb.categoria where categoria.id = '{id}';"
         rows = database.executeNonQueryRows(sql)
         return rows
+
+    def updateCategoria(self, id, categoria):
+        database = self.get_databaseXObj()
+        sql = f"update fishingdb.categoria set categoria.categoria= '{categoria}' where categoria.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows

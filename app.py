@@ -79,7 +79,11 @@ def categoria():
             )
         # Modifica una categoria
         else:
-            massage = "Se ha insertado un nuevo usuario"
+            id = int(request.form["id"])
+            categoria = request.form["categoria"]
+            logic.updateCategoria(id, categoria)
+            data = logic.getAllCategorias()
+            massage = "Se ha modificado el usuario"
             return render_template("categoria.html", data=data, massage=massage)
 
 
