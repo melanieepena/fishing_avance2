@@ -5,6 +5,7 @@ from inversorLogic import inversorLogic
 from inversorObj import inversorObj
 from emprendedorLogic import emprendedorLogic
 from fundadorLogic import fundadorLogic
+from emprendimientoLogic import emprendimientoLogic
 
 app = Flask(__name__)
 app.secret_key = "ILoveFishing"
@@ -32,24 +33,71 @@ def productos():
 
 @app.route("/fundadores", methods=["GET", "POST"])
 def fundadores():
+    logic = fundadorLogic()
+    verdadero = False
     if request.method == "GET":
-        return render_template("fundadores.html", message="")
+        data = logic.getAllFundadores()
+        message = ""
+        return render_template("fundadores.html", data=data, message=message)
     elif request.method == "POST":
-        user = request.form["user"]
-        emprendimiento = request.form["name"]
-        rol = 3
-        logicUsuario = UserLogic()
-        # Comprobando si existe
-        existeUsuario = logicUsuario.checkUserInUsuario(user, rol)
-        if existeUsuario:
-            logic = fundadorLogic()
-            rows = logic.insertNewFundador(user, emprendimiento)
-            return render_template("fundadores.html", message="Se agrego con exito")
-        else:
+        formId = int(request.form["formId"])
+        # INSERTAR
+        if formId == 1:
+            user = request.form["user"]
+            emprendimiento = request.form["name"]
+            rol = 3
+            logicUsuario = UserLogic()
+            logicEmpre = emprendimientoLogic()
+            # Comprobando si existe
+            existeUsuario = logicUsuario.checkUserInUsuario(user, rol)
+            existeEmprendimiento = logicEmpre.checkEmprendimiento(emprendimiento)
+
+            if existeUsuario and existeEmprendimiento:
+                logicInsert = fundadorLogic()
+                rows = logicInsert.insertNewFundador(user, emprendimiento)
+                data = logic.getAllFundadores()
+                message = "Se ha agregado al fundador"
+                return render_template("fundadores.html", data=data, message=message)
+            else:
+                data = logic.getAllFundadores()
+                message = "El usuario o emprendimiento seleccionado no existe. Pruebe de nuevo"
+                return render_template("fundadores.html", data=data, message=message)
+        # ELIMINAR
+        elif formId == 2:
+            id = int(request.form["id"])
+            logic.deleteFundador(id)
+            message = "Se ha eliminado un fundador"
+            data = logic.getAllFundadores()
+            return render_template("fundadores.html", data=data, message=message)
+        # Va al form para dar update
+        elif formId == 3:
+            verdadero = True
+            id = int(request.form["id"])
+            data = logic.getAllFundadores()
             return render_template(
-                "fundadores.html", message="El usuario seleccionado no existe"
+                "fundadores.html", data=data, verdadero=verdadero, id=id,
             )
-        return render_template("index.html", message="")
+        # UPDATE
+        else:
+            id = int(request.form["id"])
+            user = request.form["user"]
+            emprendimiento = request.form["name"]
+            rol = 3
+            logicUsuario = UserLogic()
+            logicEmpre = emprendimientoLogic()
+            # Comprobando si existe
+            existeUsuario = logicUsuario.checkUserInUsuario(user, rol)
+            existeEmprendimiento = logicEmpre.checkEmprendimiento(emprendimiento)
+
+            if existeUsuario and existeEmprendimiento:
+                logic.updateFundador(id, user, emprendimiento)
+                data = logic.getAllFundadores()
+                massage = "Se ha modificado al fundador"
+                return render_template("fundadores.html", data=data, massage=massage)
+            else:
+                data = logic.getAllFundadores()
+                massage = "El usuario o emprendimiento seleccionado no existe. Preuebe de nuevo"
+                return render_template("fundadores.html", data=data, message=massage)
 
 
 @app.route("/emprendimiento")

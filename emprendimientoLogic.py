@@ -68,3 +68,20 @@ class emprendimientoLogic(Logic):
             return emprendimientObj
         else:
             return None
+
+    def checkEmprendimiento(self, name):
+        dataBase = self.get_databaseXObj()
+        sql = (
+            "SELECT emprendimiento.nombre FROM fishingdb.emprendimiento "
+            + f"where emprendimiento.nombre = '{name}';"
+        )
+        print(sql)
+        data = dataBase.executeQuery(sql)
+        counter = 0
+        for item in data:
+            counter += 1
+
+        if counter > 0:
+            return True
+        else:
+            return False

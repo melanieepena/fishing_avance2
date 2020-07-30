@@ -11,19 +11,74 @@
     <h1>Fundadores</h1>
     <br>
     <p>Para insertar un nuevo fundador ingrese su usuario y el nombre del emprendimiento del cual es fundador</p>
-    {% if messaage %}
-    <p style="color: rgb(143, 7, 7);">{{messaage}}</p>
+
+    {% if message %}
+    <p style="color: red;">{{message}}</p>
     <br>
     {% endif %}
-    <form action="" method="POST">
+    <br>
+    <form action="/fundadores" method="POST">
         <label for="user">Usuario:</label>
         <input type="text" id="user" name="user"><br><br>
 
         <label for="name">Nombre del emprendimiento:</label>
         <input type="text" id="name" name="name"><br><br>
         <input type="submit" value="Insertar">
+        <input type="hidden" name="formId" id="formId" value="1">
     </form>
+    <br><br>
+    <p style="color: red;">{{massage}}</p>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Nombre de fundador</th>
+            <th>Biografia</th>
+            <th>Nombre emprendimiento</th>
+            <th>Borrar</th>
+            <th>Modificar</th>
+        </tr>
 
+        {% for registro in data %}
+        <tr>
+            <td>{{registro["id"]}}</td>
+            <td>{{registro["nombre"]}}</td>
+            <td>{{registro["biografia"]}}</td>
+            <td>{{registro["nombreEmp"]}}</td>
+            <td>
+                <form action="/fundadores" method="POST">
+                    <button type="submit" value="delete">Borrar</button>
+                    <input type="hidden" name="formId" id="formId" value="2">
+                    <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+                </form>
+            </td>
+            <td>
+                <form action="/fundadores" method="POST">
+                    <button type="submit" value="update">Modificar</button>
+                    <input type="hidden" name="formId" id="formId" value="3">
+                    <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <br><br>
+
+    {% if verdadero %}
+    <p>Modifica fundador</p>
+    <form action="/fundadores" method="POST">
+        Usuario: <input type="text" name="user" id="user" value="{{user}}">
+        emprendimiento: <input type="text" name="name" id="name" value="{{name}}">
+        <button type="submit" value="insert">Modificar</button>
+        <input type="hidden" name="formId" id="formId" value="4">
+        <input type="hidden" name="id" id="id" value="{{id}}">
+    </form>
+    <br><br>
+    {% endif %}
+
+    <p>
+        <a href="/">Regresar</a>
+    </p>
 </body>
 
 </html>
