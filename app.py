@@ -14,9 +14,31 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/inversionista")
+@app.route("/inversionista", methods=["GET", "POST"])
 def inversionista():
-    return render_template("inversionista.html")
+    if request.method == "GET":
+        return render_template("inversionista.html", message="")
+
+    elif request.method == "POST":  # "POST"
+        # Recuperando datos
+        nombre = request.form["nombre"]
+        biografia = request.form["biografia"]
+        email = request.form["email"]
+        id_usuario = request.form["idUsuario"]
+        pais = request.form["pais"]
+        ciudad = request.form["ciudad"]
+
+        ####
+        # Creando nuevo usuario
+        InversionistaLogic = inversorLogic()
+
+        InversionistaLogic.insertNewInversor(
+            nombre, biografia, email, id_usuario, pais, ciudad
+        )
+        # id_user = int(logicUsuario.getNewUser(user, password, rol).getId())
+        # Creando nuevo emprendedor
+
+        return render_template("inversionista.html", message="")
 
 
 @app.route("/emprendedor")

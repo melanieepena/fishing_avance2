@@ -1,14 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inversionista</title>
+{% endblock head %}
 
-<body>
+{% block body %}
+<h1>Inversionista</h1>
 
-</body>
+<br><br>
+<p>Inserta una inversionista</p>
+
+<form action="/inversionista" method="POST">
+    Nombre: <input type="text" name="nombre" id="nombre">
+    <br>
+    E-mail: <input type="text" name="email" id="nombre">
+    <br>
+    IdUsuario: <input type="text" name="idUsuario" id="idUsuario">
+    <br>
+    Pais: <input type="text" name="pais" id="pais">
+    <br>
+    Ciudad: <input type="text" name="ciudad" id="ciudad">
+    <br>
+    Biografia: <br>
+    <input type="text" name="biografia" id="biografia">
+
+    <button type="submit" value="insert">Insertar</button>
+    <input type="hidden" name="formId" id="formId" value="1">
+
+</form>
+
+
+<br><br>
+<p>{{massage}}</p>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Id Usuario</th>
+        <th>E-mail</th>
+        <th>Pais</th>
+        <th>Ciudad</th>
+        <th>Biofrafia</th>
+        <th>Borrar</th>
+        <th>Modificar</th>
+    </tr>
+
+    {% for registro in data %}
+    <tr>
+        <td>{{registro["id"]}}</td>
+        <td>{{registro["nombre"]}}</td>
+        <td>{{registro["idUsuario"]}}</td>
+        <td>{{registro["email"]}}</td>
+        <td>{{registro["pais"]}}</td>
+        <td>{{registro["ciudad"]}}</td>
+        <td>{{registro["biografia"]}}</td>
+        <td>
+
+            <form action="/Inversionista" method="POST">
+                <button type="submit" value="delete">Borrar</button>
+                <input type="hidden" name="formId" id="formId" value="2">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+            </form>
+        </td>
+        <td>
+            <form action="/Inversionista" method="POST">
+                <button type="submit" value="update">Modificar</button>
+                <input type="hidden" name="formId" id="formId" value="3">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+                <!--<input type="hidden" name="categoria" id="categoria" value="{{registro["categoria"]}}">-->
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+<br><br>
+
+<!--{% if verdadero %}
+<p>Modifica la categoria</p>
+<form action="/Inversionista" method="POST">
+    Categoría: <input type="text" name="categoria" id="categoria" value="{{categoria}}">
+    <button type="submit" value="insert">Modificar</button>
+    <input type="hidden" name="formId" id="formId" value="4">
+    <input type="hidden" name="id" id="id" value="{{id}}">
+</form>
+<br><br>-->
+{% endif %}
+
+<p>
+    <a href="/">Regresar</a>
+</p>
+-->
+{% endblock body %}
 
 </html>
