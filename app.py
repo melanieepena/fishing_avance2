@@ -26,7 +26,7 @@ def emprendedor():
     return render_template("emprendedor.html")
 
 
-@app.route("/productos", methods=["POST"])
+@app.route("/productos", methods=["POST", "GET"])
 def productos():
     logic = productosLogic()
     datos = logic.getAllProductoLen()
