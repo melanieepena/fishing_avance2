@@ -30,70 +30,74 @@ def emprendedor():
 def productos():
     logic = productosLogic()
     datos = logic.getAllProductoLen()
-    if request.form.get("formId"):
-        formId = int(request.form["formId"])
-        if formId == 1:
-            id_prod = request.form["idColumnaU"]
-            nameOld = request.form["NameU"]
-            fotoOld = request.form["fotoU"]
-            descOld = request.form["descU"]
-            costoOld = request.form["costoU"]
-            precioOld = request.form["precioU"]
-            patenteOld = request.form["patenteU"]
-            id_empOld = request.form["idEmpU"]
-            return render_template(
-                "productos.html",
-                mostrar=True,
-                idx=id_prod,
-                nameUpx=nameOld,
-                fotoUpx=fotoOld,
-                descUpx=descOld,
-                costoUpx=costoOld,
-                precioUpx=precioOld,
-                patenteUpx=patenteOld,
-                empex=id_empOld,
-                datosx=datos,
-            )
-        if formId == 2:
-            id_prod = int(request.form["idxForm"])
-            name = request.form["nameUp"]
-            foto = request.form["fotoUp"]
-            desc = request.form["descUp"]
-            costo = float(request.form["costoUp"])
-            precio = float(request.form["precioUp"])
-            patente = int(request.form["patenteUp"])
-            logic.updateProducto(id_prod, name, foto, desc, costo, precio, patente)
-            datos = logic.getAllProductoLen()
-            render_template("productos.html", datosx=datos, mostrar=False)
-        if formId == 3:
-            id_prod = request.form["idColumnaD"]
-            logic.deleteProducto(id_prod)
-            datos = logic.getAllProductoLen()
-            render_template("productos.html", datosx=datos, mostrar=False)
-        if formId == 4:
-            nombre = request.form["newName"]
-            foto = request.form["newFoto"]
-            desc = request.form["newDesc"]
-            costo = float(request.form["newCosto"])
-            precio = float(request.form["newPrecio"])
-            patente = int(request.form["newPatente"])
-            idEmp = int(request.form["newId_emp"])
+    if request.method == "GET":
+        return render_template("productos.html", datosx=datos, mostrar=False)
 
-            if (
-                nombre != ""
-                and desc != ""
-                and costo != ""
-                and precio != ""
-                and patente != ""
-                and idEmp != ""
-            ):
-                logic = productosLogic()
-                logic.insertNewProducto(
-                    nombre, foto, desc, costo, precio, patente, idEmp
+    elif request.method == "POST":
+        if request.form.get("formId"):
+            formId = int(request.form["formId"])
+            if formId == 1:
+                id_prod = request.form["idColumnaU"]
+                nameOld = request.form["NameU"]
+                fotoOld = request.form["fotoU"]
+                descOld = request.form["descU"]
+                costoOld = request.form["costoU"]
+                precioOld = request.form["precioU"]
+                patenteOld = request.form["patenteU"]
+                id_empOld = request.form["idEmpU"]
+                return render_template(
+                    "productos.html",
+                    mostrar=True,
+                    idx=id_prod,
+                    nameUpx=nameOld,
+                    fotoUpx=fotoOld,
+                    descUpx=descOld,
+                    costoUpx=costoOld,
+                    precioUpx=precioOld,
+                    patenteUpx=patenteOld,
+                    empex=id_empOld,
+                    datosx=datos,
                 )
-            datos = logic.getAllProductoLen()
-            return render_template("productos.html", datosx=datos, mostrar=False)
-    return render_template("productos.html", datosx=datos, mostrar=False)
+            if formId == 2:
+                id_prod = int(request.form["idxForm"])
+                name = request.form["nameUp"]
+                foto = request.form["fotoUp"]
+                desc = request.form["descUp"]
+                costo = float(request.form["costoUp"])
+                precio = float(request.form["precioUp"])
+                patente = int(request.form["patenteUp"])
+                logic.updateProducto(id_prod, name, foto, desc, costo, precio, patente)
+                datos = logic.getAllProductoLen()
+                render_template("productos.html", datosx=datos, mostrar=False)
+            if formId == 3:
+                id_prod = request.form["idColumnaD"]
+                logic.deleteProducto(id_prod)
+                datos = logic.getAllProductoLen()
+                render_template("productos.html", datosx=datos, mostrar=False)
+            if formId == 4:
+                nombre = request.form["newName"]
+                foto = request.form["newFoto"]
+                desc = request.form["newDesc"]
+                costo = float(request.form["newCosto"])
+                precio = float(request.form["newPrecio"])
+                patente = int(request.form["newPatente"])
+                idEmp = int(request.form["newId_emp"])
+
+                if (
+                    nombre != ""
+                    and desc != ""
+                    and costo != ""
+                    and precio != ""
+                    and patente != ""
+                    and idEmp != ""
+                ):
+                    logic = productosLogic()
+                    logic.insertNewProducto(
+                        nombre, foto, desc, costo, precio, patente, idEmp
+                    )
+                datos = logic.getAllProductoLen()
+                return render_template("productos.html", datosx=datos, mostrar=False)
+        return render_template("productos.html", datosx=datos, mostrar=False)
 
 
 @app.route("/fundadores")
