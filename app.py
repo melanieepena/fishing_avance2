@@ -61,7 +61,6 @@ def signUPEmprendimiento():
     elif request.method == "POST":  # "POST"
         # Recuperando datos
         name = request.form["nombre"]
-        rol = 3
         estado = str(request.form["estado"])
         descripcion = str(request.form["descripcion"])
         historia = request.form["historia"]
@@ -91,7 +90,7 @@ def signUPEmprendimiento():
         # id_user = int(logicUsuario.getNewUser(user, password, rol).getId())
         # Creando nuevo emprendedor
 
-        return render_template("index.html", message="")
+        return render_template("emprendimiento.html", message="")
 
 
 @app.route("/categoria")

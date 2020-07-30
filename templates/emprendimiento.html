@@ -91,17 +91,17 @@
 
 {% if verdadero %}
 <p>Modifica el emprendimiento</p>
-<form action="/emprendimiento" method="POST">
+<form action="/Emprendimiento" method="POST">
     estado: <input type="text" name="estado" id="estado" value="{{estado}}">
-    descripcion: <input type="text" name="descripcion" id="descripcion" value="{{estado}}"><br><br>
-    historia: <input type="text" name="historia" id="historia" value="{{estado}}"><br><br>
-    eslogan: <input type="text" name="eslogan" id="eslogan" value="{{estado}}"><br><br>
-    inversion_inicial: <input type="text" name="inversion_inicial" id="inversion_inicial" value="{{estado}}"><br><br>
-    fecha_fundacion: <input type="text" name="fecha_fundacion" id="fecha_fundacion" value="{{estado}}"><br><br>
-    venta_año_anterior: <input type="text" name="venta_año_anterior" id="venta_año_anterior" value="{{estado}}"><br><br>
-    oferta_porcentaje: <input type="text" name="oferta_porcentaje" id="oferta_porcentaje" value="{{estado}}"><br><br>
-    id_emprendedor: <input type="text" name="id_emprendedor" id="id_emprendedor" value="{{estado}}"><br><br>
-    nombre: <input type="text" name="nombre" id="nombre" value="{{estado}}"><br><br>
+    descripcion: <input type="text" name="descripcion" id="descripcion" value="{{descripcion}}"><br><br>
+    historia: <input type="text" name="historia" id="historia" value="{{historia}}"><br><br>
+    eslogan: <input type="text" name="eslogan" id="eslogan" value="{{eslogan}}"><br><br>
+    inversion_inicial: <input type="text" name="inversion_inicial" id="inversion_inicial" value="{{inversion_inicial}}"><br><br>
+    fecha_fundacion: <input type="text" name="fecha_fundacion" id="fecha_fundacion" value="{{fecha_fundacion}}"><br><br>
+    venta_año_anterior: <input type="text" name="venta_año_anterior" id="venta_año_anterior" value="{{venta_año_anterior}}"><br><br>
+    oferta_porcentaje: <input type="text" name="oferta_porcentaje" id="oferta_porcentaje" value="{{oferta_porcentaje}}"><br><br>
+    id_emprendedor: <input type="text" name="id_emprendedor" id="id_emprendedor" value="{{id_emprendedor}}"><br><br>
+    nombre: <input type="text" name="nombre" id="nombre" value="{{nombre}}"><br><br>
     <button type="submit" value="insert">Modificar</button>
     <input type="hidden" name="formId" id="formId" value="4">
     <input type="hidden" name="id" id="id" value="{{id}}">
