@@ -12,14 +12,14 @@
 
 <br><br>
 <p>Inserte por favor un emprendimiento</p>
-<form action="/emprendimiento" method="POST">
+<form action="/Emprendimiento" method="POST">
 
     estado: <input type="text" name="estado" id="estado"><br><br>
     descripcion: <input type="text" name="descripcion" id="descripcion"><br><br>
     historia: <input type="text" name="historia" id="historia"><br><br>
     eslogan: <input type="text" name="eslogan" id="eslogan"><br><br>
     inversion_inicial: <input type="text" name="inversion_inicial" id="inversion_inicial"><br><br>
-    fecha_fundacion: <input type="text" name="fecha_fundacion" id="fecha_fundacion"><br><br>
+    fecha_fundacion: <input type="date" name="fecha_fundacion" id="fecha_fundacion"><br><br>
     venta_año_anterior: <input type="text" name="venta_año_anterior" id="venta_año_anterior"><br><br>
     oferta_porcentaje: <input type="text" name="oferta_porcentaje" id="oferta_porcentaje"><br><br>
     id_emprendedor: <input type="text" name="id_emprendedor" id="id_emprendedor"><br><br>
@@ -50,16 +50,25 @@
     {% for registro in data %}
     <tr>
         <td>{{registro["id"]}}</td>
-        <td>{{registro["emprendimiento"]}}</td>
+        <td>{{registro["estado"]}}</td>
+        <td>{{registro["descripcion"]}}</td>
+        <td>{{registro["historia"]}}</td>
+        <td>{{registro["eslogan"]}}</td>
+        <td>{{registro["inversion_inicial"]}}</td>
+        <td>{{registro["fecha_fundacion"]}}</td>
+        <td>{{registro["venta_año_anterior"]}}</td>
+        <td>{{registro["oferta_porcentaje"]}}</td>
+        <td>{{registro["id_emprendedor"]}}</td>
+        <td>{{registro["nombre"]}}</td>
         <td>
-            <form action="/emprendimiento" method="POST">
+            <form action="/Emprendimiento" method="POST">
                 <button type="submit" value="delete">Borrar</button>
                 <input type="hidden" name="formId" id="formId" value="2">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
             </form>
         </td>
         <td>
-            <form action="/emprendimiento" method="POST">
+            <form action="/Emprendimiento" method="POST">
                 <button type="submit" value="update">Modificar</button>
                 <input type="hidden" name="formId" id="formId" value="3">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
