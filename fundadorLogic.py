@@ -13,8 +13,11 @@ class fundadorLogic(Logic):
 
     def insertNewFundador(self, user, name):
 
-        usuarioEmprendedor = UserLogic()
-        id_emprendedor = usuarioEmprendedor.getUserByUser(user)
+        id_usuario = UserLogic()
+        usuario = id_usuario.getUserByUser(user)
+
+        infoEmprendedor = emprendedorLogic()
+        id_emprendedor = infoEmprendedor.getEmprendedorByUser(usuario.getId())
 
         infoEmprendimiento = emprendimientoLogic()
         id_emprendimiento = infoEmprendimiento.getEmprendimientoByName(name)
