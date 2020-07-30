@@ -4,6 +4,7 @@ from userObj import UserObj
 from inversorLogic import inversorLogic
 from inversorObj import inversorObj
 from emprendedorLogic import emprendedorLogic
+from fundadorLogic import fundadorLogic
 
 app = Flask(__name__)
 app.secret_key = "ILoveFishing"
@@ -29,9 +30,26 @@ def productos():
     return render_template("productos.html")
 
 
-@app.route("/fundadores")
+@app.route("/fundadores", methods=["GET", "POST"])
 def fundadores():
-    return render_template("fundadores.html")
+    if request.method == "GET":
+        return render_template("fundadores.html", message="")
+    elif request.method == "POST":
+        user = request.form["user"]
+        emprendimiento = request.form["name"]
+        rol = 3
+        logicUsuario = UserLogic()
+        # Comprobando si existe
+        existeUsuario = logicUsuario.checkUserInUsuario(user, rol)
+        if existeUsuario:
+            logic = fundadorLogic()
+            rows = logic.insertNewFundador(user, emprendimiento)
+            return render_template("fundadores.html", message="Se agrego con exito")
+        else:
+            return render_template(
+                "fundadores.html", message="El usuario seleccionado no existe"
+            )
+        return render_template("index.html", message="")
 
 
 @app.route("/emprendimiento")
