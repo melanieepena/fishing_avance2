@@ -115,8 +115,22 @@ def signUPEmprendimiento():
             verdadero = True
             data = logic.getAllEmprendimientoLen()
             return render_template(
-                "emprendimiento.html", data=data, verdadero=verdadero, id=id,
+                "emprendimiento.html",
+                data=data,
+                verdadero=verdadero,
+                id=id,
+                estado=estado,
+                descripcion=descripcion,
+                historia=historia,
+                eslogan=eslogan,
+                inversion_inicial=inversion_inicial,
+                fecha_fundacion=fecha_fundacion,
+                venta_año_anterior=venta_año_anterior,
+                oferta_porcentaje=oferta_porcentaje,
+                id_emprendedor=id_emprendedor,
+                nombre=nombre,
             )
+
         # Modifica una categoria
         else:
             id = int(request.form["id"])
@@ -144,8 +158,8 @@ def signUPEmprendimiento():
                 nombre,
             )
             data = logic.getAllEmprendimientoLen()
-            massage = "Se ha modificado el usuario"
-            return render_template("categoria.html", data=data, massage=massage)
+            massage = "Se ha modificado el emprendimiento"
+            return render_template("emprendimiento.html", data=data, massage=massage)
 
 
 @app.route("/categoria")
