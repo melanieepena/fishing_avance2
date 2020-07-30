@@ -4,16 +4,27 @@
 {% block head %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Categorías</title>
+<title>Emprendimientos</title>
 {% endblock head %}
 
 {% block body %}
-<h1>Categorías</h1>
+<h1>Emprendimientos</h1>
 
 <br><br>
-<p>Inserta una categoría</p>
-<form action="/categoria" method="POST">
-    Categoría: <input type="text" name="categoria" id="categoria">
+<p>Inserte por favor un emprendimiento</p>
+<form action="/emprendimiento" method="POST">
+
+    estado: <input type="text" name="estado" id="estado"><br><br>
+    descripcion: <input type="text" name="descripcion" id="descripcion"><br><br>
+    historia: <input type="text" name="historia" id="historia"><br><br>
+    eslogan: <input type="text" name="eslogan" id="eslogan"><br><br>
+    inversion_inicial: <input type="text" name="inversion_inicial" id="inversion_inicial"><br><br>
+    fecha_fundacion: <input type="text" name="fecha_fundacion" id="fecha_fundacion"><br><br>
+    venta_año_anterior: <input type="text" name="venta_año_anterior" id="venta_año_anterior"><br><br>
+    oferta_porcentaje: <input type="text" name="oferta_porcentaje" id="oferta_porcentaje"><br><br>
+    id_emprendedor: <input type="text" name="id_emprendedor" id="id_emprendedor"><br><br>
+    nombre: <input type="text" name="nombre" id="nombre"><br><br>
+
     <button type="submit" value="insert">Insertar</button>
     <input type="hidden" name="formId" id="formId" value="1">
 </form>
@@ -22,7 +33,16 @@
 <table border="1">
     <tr>
         <th>Id</th>
-        <th>Categoría</th>
+        <th>estado</th>
+        <th>descripcion</th>
+        <th>historia</th>
+        <th>eslogan</th>
+        <th>inversion_inicial</th>
+        <th>fecha_fundacion</th>
+        <th>venta_año_anterior</th>
+        <th>oferta_porcentaje</th>
+        <th>id_emprendedor</th>
+        <th>nombre</th>
         <th>Borrar</th>
         <th>Modificar</th>
     </tr>
@@ -30,20 +50,28 @@
     {% for registro in data %}
     <tr>
         <td>{{registro["id"]}}</td>
-        <td>{{registro["categoria"]}}</td>
+        <td>{{registro["emprendimiento"]}}</td>
         <td>
-            <form action="/categoria" method="POST">
+            <form action="/emprendimiento" method="POST">
                 <button type="submit" value="delete">Borrar</button>
                 <input type="hidden" name="formId" id="formId" value="2">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
             </form>
         </td>
         <td>
-            <form action="/categoria" method="POST">
+            <form action="/emprendimiento" method="POST">
                 <button type="submit" value="update">Modificar</button>
                 <input type="hidden" name="formId" id="formId" value="3">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
-                <input type="hidden" name="categoria" id="categoria" value="{{registro["categoria"]}}">
+                <input type="hidden" name="estado" id="estado" value="{{registro["estado"]}}">
+                <input type="hidden" name="descripcion" id="descripcion" value="{{registro["descripcion"]}}">
+                <input type="hidden" name="historia" id="historia" value="{{registro["historia"]}}">
+                <input type="hidden" name="eslogan" id="eslogan" value="{{registro["eslogan"]}}">
+                <input type="hidden" name="inversion_inicial" id="inversion_inicial" value="{{registro["inversion_inicial"]}}">
+                <input type="hidden" name="fecha_fundacion" id="fecha_fundacion" value="{{registro["fecha_fundacion"]}}">
+                <input type="hidden" name="venta_año_anterior" id="venta_año_anterior" value="{{registro["venta_año_anterior"]}}">
+                <input type="hidden" name="oferta_porcentaje" id="oferta_porcentaje" value="{{registro["oferta_porcentaje"]}}">
+                <input type="hidden" name="id_emprendedor" id="id_emprendedor" value="{{registro["id_emprendedor"]}}">
             </form>
         </td>
     </tr>
@@ -53,9 +81,18 @@
 <br><br>
 
 {% if verdadero %}
-<p>Modifica la categoria</p>
-<form action="/categoria" method="POST">
-    Categoría: <input type="text" name="categoria" id="categoria" value="{{categoria}}">
+<p>Modifica el emprendimiento</p>
+<form action="/emprendimiento" method="POST">
+    estado: <input type="text" name="estado" id="estado" value="{{estado}}">
+    descripcion: <input type="text" name="descripcion" id="descripcion" value="{{estado}}"><br><br>
+    historia: <input type="text" name="historia" id="historia" value="{{estado}}"><br><br>
+    eslogan: <input type="text" name="eslogan" id="eslogan" value="{{estado}}"><br><br>
+    inversion_inicial: <input type="text" name="inversion_inicial" id="inversion_inicial" value="{{estado}}"><br><br>
+    fecha_fundacion: <input type="text" name="fecha_fundacion" id="fecha_fundacion" value="{{estado}}"><br><br>
+    venta_año_anterior: <input type="text" name="venta_año_anterior" id="venta_año_anterior" value="{{estado}}"><br><br>
+    oferta_porcentaje: <input type="text" name="oferta_porcentaje" id="oferta_porcentaje" value="{{estado}}"><br><br>
+    id_emprendedor: <input type="text" name="id_emprendedor" id="id_emprendedor" value="{{estado}}"><br><br>
+    nombre: <input type="text" name="nombre" id="nombre" value="{{estado}}"><br><br>
     <button type="submit" value="insert">Modificar</button>
     <input type="hidden" name="formId" id="formId" value="4">
     <input type="hidden" name="id" id="id" value="{{id}}">
