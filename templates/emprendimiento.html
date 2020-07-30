@@ -93,7 +93,12 @@
 {% if verdadero %}
 <p>Modifica el emprendimiento</p>
 <form action="/Emprendimiento" method="POST">
-    estado: <input type="text" name="estado" id="estado" value="{{estado}}">
+    estado: 
+    <select name="estado" id="estado">
+        <option value="Huevo">Huevo </option>
+        <option value="Pez Dorado">Pez dorado</option>
+        <option value="tiburon">Tiburón</option>
+    </select>
     descripcion: <input type="text" name="descripcion" id="descripcion" value="{{descripcion}}"><br><br>
     historia: <input type="text" name="historia" id="historia" value="{{historia}}"><br><br>
     eslogan: <input type="text" name="eslogan" id="eslogan" value="{{eslogan}}"><br><br>
