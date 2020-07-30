@@ -31,9 +31,13 @@
     <input type="hidden" name="formId" id="formId" value="1">
 
 </form>
+<br>
+<p>
+    <a href="/">Regresar</a>
+</p>
 
 
-<br><br>
+<br>
 <p>{{massage}}</p>
 <table border="1">
     <tr>
@@ -59,6 +63,7 @@
         <td>{{registro["biografia"]}}</td>
         <td>
 
+
             <form action="/Inversionista" method="POST">
                 <button type="submit" value="delete">Borrar</button>
                 <input type="hidden" name="formId" id="formId" value="2">
@@ -70,7 +75,12 @@
                 <button type="submit" value="update">Modificar</button>
                 <input type="hidden" name="formId" id="formId" value="3">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
-                <!--<input type="hidden" name="categoria" id="categoria" value="{{registro["categoria"]}}">-->
+                <input type="hidden" name="nombre" id="nombre" value="{{registro["nombre"]}}">
+                <input type="hidden" name="idUsuario" id="idUsuario" value="{{registro["idUsuario"]}}">
+                <input type="hidden" name="email" id="email" value="{{registro["email"]}}">
+                <input type="hidden" name="pais" id="pais" value="{{registro["pais"]}}">
+                <input type="hidden" name="ciudad" id="ciudad" value="{{registro["ciudad"]}}">
+                <input type="hidden" name="biografia" id="biografia" value="{{registro["biografia"]}}"> 
             </form>
         </td>
     </tr>
@@ -79,21 +89,26 @@
 </table>
 <br><br>
 
-<!--{% if verdadero %}
-<p>Modifica la categoria</p>
+{% if verdadero %}
+<p>Modifica datos del inversionista</p>
 <form action="/Inversionista" method="POST">
-    Categoría: <input type="text" name="categoria" id="categoria" value="{{categoria}}">
+    Nombre: <input type="text" name="nombre" id="nombre" value="{{nombre}}"><br><br>
+    Id Usuario: <input type="text" name="idUsuario" id="idUsuario" value="{{idUsuario}}"><br><br>
+    Email: <input type="text" name="email" id="email" value="{{email}}"> <br><br>
+    Pais: <input type="text" name="pais" id="pais" value="{{pais}}"><br><br>
+    Ciudad: <input type="text" name="ciudad" id="ciudad" value="{{ciudad}}"><br><br>
+    Biografia: <input type="text" name="biografia" id="biografia" value="{{biografia}}"><br><br>
+    
     <button type="submit" value="insert">Modificar</button>
     <input type="hidden" name="formId" id="formId" value="4">
     <input type="hidden" name="id" id="id" value="{{id}}">
 </form>
-<br><br>-->
+<br><br>
 {% endif %}
 
-<p>
-    <a href="/">Regresar</a>
-</p>
--->
+
 {% endblock body %}
+</body>
 
 </html>
+

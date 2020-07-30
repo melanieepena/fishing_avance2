@@ -15,6 +15,7 @@ class inversorLogic(Logic):
             "ciudad",
         ]
 
+    # Metodo insert
     def insertNewInversor(self, name, bio, email, id_user, country, city):
         database = self.get_databaseXObj()
         sql = (
@@ -55,3 +56,26 @@ class inversorLogic(Logic):
         )
         rows = database.executeNonQueryRows(sql)
         return rows
+
+    # Metodo get
+    def getAllInversionista(self):
+        dataBase = self.get_databaseXObj()
+        sql = "SELECT * FROM fishingdb.inversionista;"
+        data = dataBase.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        return data
+
+    # Metodo delete
+    def deleteInversionista(self, id):
+        database = self.get_databaseXObj()
+        sql = f"delete from fishingdb.inversionista where inversionista.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows
+
+    # Metodo update
+    def updateInversionista(self, id, name, bio, email, id_user, country, city):
+        database = self.get_databaseXObj()
+        sql = f"update fishingdb.inversionista set inversionista.nombre= '{nombre}',inversionista.biografia= '{biografia}',inversionista.email= '{email}',inversionista.id_usuario= '{id_usuario}',inversionista.pais= '{pais}',inversionista.ciudad= '{ciudad}' where inversionista.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows
+
