@@ -75,7 +75,27 @@ class emprendimientoLogic(Logic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    def updateEmprendimiento():
+    def getAllEmprendimientoLen(self):
+        dataBase = self.get_databaseXObj()
+        sql = "SELECT * FROM fishingdb.emprendimiento;"
+        data = dataBase.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        return data
+
+    def updateEmprendimiento(
+        self,
+        id,
+        estado,
+        descripcion,
+        historia,
+        eslogan,
+        inversion_inicial,
+        fecha_fundacion,
+        venta_año_anterior,
+        oferta_porcentaje,
+        id_emprendedor,
+        nombre,
+    ):
         database = self.get_databaseXObj()
         sql = f"update fishingdb.emprendimiento set emprendimiento.estado= '{estado}',emprendimiento.descripcion= '{descripcion}',emprendimiento.historia= '{historia}',emprendimiento.eslogan= '{eslogan}',emprendimiento.inversion_inicial= '{inversion_inicial}',emprendimiento.fecha_fundacion= '{fecha_fundacion}',emprendimiento.venta_año_anterior= '{venta_año_anterior}',emprendimiento.oferta_porcentaje= '{oferta_porcentaje}',emprendimiento.id_emprendedor= '{id_emprendedor}',emprendimiento.nombre= '{nombre}'  where emprendimiento.id = '{id}';"
         rows = database.executeNonQueryRows(sql)

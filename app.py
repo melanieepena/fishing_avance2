@@ -55,42 +55,97 @@ def fundadores():
 
 @app.route("/Emprendimiento", methods=["GET", "POST"])
 def signUPEmprendimiento():
+    logic = emprendimientoLogic()
+    massage = ""
+    verdadero = False
     if request.method == "GET":
-        return render_template("emprendimiento.html", message="")
+        data = logic.getAllEmprendimientoLen()
+        return render_template("emprendimiento.html", data=data, massage=massage)
 
     elif request.method == "POST":  # "POST"
-        # Recuperando datos
-        name = request.form["nombre"]
-        estado = str(request.form["estado"])
-        descripcion = str(request.form["descripcion"])
-        historia = request.form["historia"]
-        eslogan = request.form["eslogan"]
-        inversion_inicial = request.form["inversion_inicial"]
-        fecha_fundacion = request.form["fecha_fundacion"]
-        venta_año_anterior = request.form["venta_año_anterior"]
-        oferta_porcentaje = request.form["oferta_porcentaje"]
-        id_emprendedor = request.form["id_emprendedor"]
-        nombre = request.form["nombre"]
-        ####
-        # Creando nuevo usuario
-        emprendimientoLog = emprendimientoLogic()
+        formId = int(request.form["formId"])
+        # Inserta una emprendimiento
+        if formId == 1:
+            estado = str(request.form["estado"])
+            descripcion = request.form["descripcion"]
+            historia = str(request.form["historia"])
+            eslogan = request.form["eslogan"]
+            inversion_inicial = request.form["inversion_inicial"]
+            fecha_fundacion = request.form["fecha_fundacion"]
+            venta_año_anterior = request.form["venta_año_anterior"]
+            oferta_porcentaje = request.form["oferta_porcentaje"]
+            id_emprendedor = request.form["id_emprendedor"]
+            nombre = request.form["nombre"]
+            logic.insertNewEmprendimiento(
+                estado,
+                descripcion,
+                historia,
+                eslogan,
+                inversion_inicial,
+                fecha_fundacion,
+                venta_año_anterior,
+                oferta_porcentaje,
+                id_emprendedor,
+                nombre,
+            )
+            massage = "Se ha insertado un nuevo emprendimiento"
+            data = logic.getAllEmprendimientoLen()
+            return render_template("emprendimiento.html", data=data, massage=massage)
 
-        emprendimientoLog.insertNewEmprendimiento(
-            estado,
-            descripcion,
-            historia,
-            eslogan,
-            inversion_inicial,
-            fecha_fundacion,
-            venta_año_anterior,
-            oferta_porcentaje,
-            id_emprendedor,
-            nombre,
-        )
-        # id_user = int(logicUsuario.getNewUser(user, password, rol).getId())
-        # Creando nuevo emprendedor
-
-        return render_template("emprendimiento.html", message="")
+            # Elimina una categoria
+        elif formId == 2:
+            id = int(request.form["id"])
+            logic.deleteEmprendimiento(id)
+            massage = "Se ha eliminado un usuario"
+            data = logic.getAllEmprendimientoLen()
+            return render_template("emprendimiento.html", data=data, massage=massage)
+        # Va al form para dar update
+        elif formId == 3:
+            id = int(request.form["id"])
+            estado = str(request.form["estado"])
+            descripcion = request.form["descripcion"]
+            historia = str(request.form["historia"])
+            eslogan = request.form["eslogan"]
+            inversion_inicial = request.form["inversion_inicial"]
+            fecha_fundacion = request.form["fecha_fundacion"]
+            venta_año_anterior = request.form["venta_año_anterior"]
+            oferta_porcentaje = request.form["oferta_porcentaje"]
+            id_emprendedor = request.form["id_emprendedor"]
+            nombre = request.form["nombre"]
+            verdadero = True
+            data = logic.getAllEmprendimientoLen()
+            return render_template(
+                "emprendimiento.html", data=data, verdadero=verdadero, id=id,
+            )
+        # Modifica una categoria
+        else:
+            id = int(request.form["id"])
+            estado = str(request.form["estado"])
+            descripcion = request.form["descripcion"]
+            historia = str(request.form["historia"])
+            eslogan = request.form["eslogan"]
+            inversion_inicial = request.form["inversion_inicial"]
+            fecha_fundacion = request.form["fecha_fundacion"]
+            venta_año_anterior = request.form["venta_año_anterior"]
+            oferta_porcentaje = request.form["oferta_porcentaje"]
+            id_emprendedor = request.form["id_emprendedor"]
+            nombre = request.form["nombre"]
+            logic.updateEmprendimiento(
+                id,
+                estado,
+                descripcion,
+                historia,
+                eslogan,
+                inversion_inicial,
+                fecha_fundacion,
+                venta_año_anterior,
+                oferta_porcentaje,
+                id_emprendedor,
+                nombre,
+            )
+            data = logic.getAllEmprendimientoLen()
+            massage = "Se ha modificado el usuario"
+            return render_template("categoria.html", data=data, massage=massage)
 
 
 @app.route("/categoria")
