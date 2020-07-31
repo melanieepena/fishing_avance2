@@ -19,9 +19,10 @@ class inversorLogic(Logic):
     def insertNewInversor(self, name, bio, email, id_user, country, city):
         database = self.get_databaseXObj()
         sql = (
-            "insert into fishingdb.inversionista (id, nombre, biografia, email, id_usuario, pais, ciudad) "
+            f"insert into fishingdb.inversionista (id, nombre, biografia, email, id_usuario, pais, ciudad) "
             + f"values (0, '{name}', '{bio}', '{email}', {id_user},'{country}','{city}');"
         )
+        # sql = f"insert into fishingdb.categoria (categoria) values ('{categoria}');"
         rows = database.executeNonQueryRows(sql)
         return rows
 
