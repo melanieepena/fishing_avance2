@@ -73,7 +73,7 @@ def inversionista():
                 ciudad=ciudad,
             )
 
-        # Modificar inversionista
+        # Modificar
         else:
             id = int(request.form["id"])
             nombre = request.form["nombre"]

@@ -76,12 +76,6 @@ class inversorLogic(Logic):
     # Metodo update
     def updateInversionista(self, id, name, bio, email, id_user, country, city):
         database = self.get_databaseXObj()
-        sql = f"update fishingdb.inversionista "
-        +f"set inversionista.nombre= '{name}', "
-        +f"inversionista.biografia= '{bio}', "
-        +f"inversionista.email= '{email}', "
-        +f"inversionista.id_usuario= '{id_user}', "
-        +f"inversionista.pais= '{country}', "
-        +f"inversionista.ciudad= '{city}' where inversionista.id = '{id}';"
+        sql = f"update fishingdb.inversionista set inversionista.nombre= '{name}', inversionista.biografia= '{bio}', inversionista.email= '{email}', inversionista.id_usuario= '{id_user}', inversionista.pais= '{country}', inversionista.ciudad= '{city}' where inversionista.id = '{id}';"
         row = database.executeNonQueryRows(sql)
         return row
