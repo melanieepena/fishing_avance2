@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
+import mysql.connector
+from mysql.connector import Error
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -76,28 +78,44 @@ def signUPEmprendimiento():
             oferta_porcentaje = request.form["oferta_porcentaje"]
             id_emprendedor = request.form["id_emprendedor"]
             nombre = request.form["nombre"]
-            logic.insertNewEmprendimiento(
-                estado,
-                descripcion,
-                historia,
-                eslogan,
-                inversion_inicial,
-                fecha_fundacion,
-                venta_año_anterior,
-                oferta_porcentaje,
-                id_emprendedor,
-                nombre,
-            )
-            massage = "Se ha insertado un nuevo emprendimiento"
-            data = logic.getAllEmprendimientoLen()
+
+            try:
+                logic.insertNewEmprendimiento(
+                    estado,
+                    descripcion,
+                    historia,
+                    eslogan,
+                    inversion_inicial,
+                    fecha_fundacion,
+                    venta_año_anterior,
+                    oferta_porcentaje,
+                    id_emprendedor,
+                    nombre,
+                )
+                massage = "Se ha insertado un nuevo emprendimiento"
+                data = logic.getAllEmprendimientoLen()
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                massage = "No se puede insertar. No existe el id emprendedor"
+                data = logic.getAllEmprendimientoLen()
+
             return render_template("emprendimiento.html", data=data, massage=massage)
 
             # Elimina una categoria
         elif formId == 2:
             id = int(request.form["id"])
-            logic.deleteEmprendimiento(id)
-            massage = "Se ha eliminado un usuario"
-            data = logic.getAllEmprendimientoLen()
+
+            try:
+                logic.deleteEmprendimiento(id)
+                massage = "Se ha eliminado un usuario"
+                data = logic.getAllEmprendimientoLen()
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                massage = "No se puede eliminar. Afecta la integridad de los datos"
+                data = logic.getAllEmprendimientoLen()
+
             return render_template("emprendimiento.html", data=data, massage=massage)
         # Va al form para dar update
         elif formId == 3:
@@ -144,21 +162,29 @@ def signUPEmprendimiento():
             oferta_porcentaje = request.form["oferta_porcentaje"]
             id_emprendedor = request.form["id_emprendedor"]
             nombre = request.form["nombre"]
-            logic.updateEmprendimiento(
-                id,
-                estado,
-                descripcion,
-                historia,
-                eslogan,
-                inversion_inicial,
-                fecha_fundacion,
-                venta_año_anterior,
-                oferta_porcentaje,
-                id_emprendedor,
-                nombre,
-            )
-            data = logic.getAllEmprendimientoLen()
-            massage = "Se ha modificado el emprendimiento"
+
+            try:
+                logic.updateEmprendimiento(
+                    id,
+                    estado,
+                    descripcion,
+                    historia,
+                    eslogan,
+                    inversion_inicial,
+                    fecha_fundacion,
+                    venta_año_anterior,
+                    oferta_porcentaje,
+                    id_emprendedor,
+                    nombre,
+                )
+                data = logic.getAllEmprendimientoLen()
+                massage = "Se ha modificado el emprendimiento"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                massage = "No se puede modificar. No existe el id emprendedor"
+                data = logic.getAllEmprendimientoLen()
+
             return render_template("emprendimiento.html", data=data, massage=massage)
 
 
