@@ -18,7 +18,7 @@
     <br>
     E-mail: <input type="text" name="email" id="email">
     <br>
-    IdUsuario: <input type="text" name="idUsuario" id="idUsuario">
+    IdUsuario: <input type="text" name="id_usuario" id="id_usuario">
     <br>
     Pais: <input type="text" name="pais" id="pais">
     <br>
@@ -38,14 +38,14 @@
 
 
 <br>
-<p>{{massage}}</p>
+<p>{{message}}</p>
 <table border="1">
     <tr>
         <th>Id</th>
         <th>Nombre</th>
         <th>Biografia</th>
         <th>Email</th>
-        <th>Id Usuario</th>
+        <th>Id_Usuario</th>
         <th>Pais</th>
         <th>Ciudad</th>
         <th>Borrar</th>
@@ -58,7 +58,7 @@
         <td>{{registro["nombre"]}}</td>
         <td>{{registro["biografia"]}}</td>
         <td>{{registro["email"]}}</td>
-        <td>{{registro["idUsuario"]}}</td>
+        <td>{{registro["id_usuario"]}}</td>
         <td>{{registro["pais"]}}</td>
         <td>{{registro["ciudad"]}}</td>
         <td>
@@ -78,7 +78,7 @@
                 <input type="hidden" name="nombre" id="nombre" value="{{registro["nombre"]}}">
                 <input type="hidden" name="biografia" id="biografia" value="{{registro["biografia"]}}"> 
                 <input type="hidden" name="email" id="email" value="{{registro["email"]}}">
-                <input type="hidden" name="idUsuario" id="idUsuario" value="{{registro["idUsuario"]}}">              
+                <input type="hidden" name="id_usuario" id="id_usuario" value="{{registro["id_usuario"]}}">              
                 <input type="hidden" name="pais" id="pais" value="{{registro["pais"]}}">
                 <input type="hidden" name="ciudad" id="ciudad" value="{{registro["ciudad"]}}">
                 
@@ -96,7 +96,7 @@
     Nombre: <input type="text" name="nombre" id="nombre" value="{{nombre}}"><br><br>
     Biografia: <input type="text" name="biografia" id="biografia" value="{{biografia}}"><br><br>
     Email: <input type="text" name="email" id="email" value="{{email}}"> <br><br>
-    Id Usuario: <input type="text" name="idUsuario" id="idUsuario" value="{{idUsuario}}"><br><br>
+    Id Usuario: <input type="text" name="id_usuario" id="id_usuario" value="{{id_usuario}}"><br><br>
     Pais: <input type="text" name="pais" id="pais" value="{{pais}}"><br><br>
     Ciudad: <input type="text" name="ciudad" id="ciudad" value="{{ciudad}}"><br><br>
     

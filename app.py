@@ -30,7 +30,7 @@ def inversionista():
             nombre = request.form["nombre"]
             biografia = request.form["biografia"]
             email = request.form["email"]
-            id_usuario = request.form["idUsuario"]
+            id_usuario = request.form["id_usuario"]
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
 
@@ -53,7 +53,7 @@ def inversionista():
             nombre = request.form["nombre"]
             biografia = request.form["biografia"]
             email = request.form["email"]
-            id_usuario = request.form["idUsuario"]
+            id_usuario = request.form["id_usuario"]
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
 
@@ -79,7 +79,7 @@ def inversionista():
             nombre = request.form["nombre"]
             biografia = request.form["biografia"]
             email = request.form["email"]
-            id_usuario = request.form["idUsuario"]
+            id_usuario = request.form["id_usuario"]
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
 
