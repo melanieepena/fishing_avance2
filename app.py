@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
+import mysql.connector
+from mysql.connector import Error
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -60,9 +62,17 @@ def categoria():
         # Elimina una categoria
         elif formId == 2:
             id = int(request.form["id"])
-            logic.deleteCategoria(id)
-            massage = "Se ha eliminado un usuario"
-            data = logic.getAllCategorias()
+
+            try:
+                logic.deleteCategoria(id)
+                massage = "Se ha eliminado un usuario"
+                data = logic.getAllCategorias()
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                massage = "No se puede eliminar. Afecta la integridad de los datos"
+                data = logic.getAllCategorias()
+
             return render_template("categoria.html", data=data, massage=massage)
         # Va al form para dar update
         elif formId == 3:
