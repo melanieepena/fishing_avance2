@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
+import mysql.connector
+from mysql.connector import Error
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -38,18 +40,35 @@ def emprendedor():
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
             biografia = request.form["biografia"]
-            logic.insertNewEmprendedor(
-                nombre, email, telefono, id_usuario, pais, ciudad, biografia
-            )
-            data = logic.getAllEmprendedores()
-            message = "Se ha insertado un nuevo usuario"
+
+            try:
+                logic.insertNewEmprendedor(
+                    nombre, email, telefono, id_usuario, pais, ciudad, biografia
+                )
+                data = logic.getAllEmprendedores()
+                message = "Se ha insertado un nuevo usuario"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = "No se puede insertar. No existe el id usuario"
+                data = logic.getAllEmprendedores()
+
             return render_template("emprendedor.html", data=data, message=message)
+
         # Elimina una categoria
         elif formId == 2:
             id = int(request.form["id"])
-            logic.deleteEmprendedor(id)
-            data = logic.getAllEmprendedores()
-            message = "Se ha eliminado un usuario"
+
+            try:
+                logic.deleteEmprendedor(id)
+                data = logic.getAllEmprendedores()
+                message = "Se ha eliminado un usuario"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = "No se puede eliminar. Afecta la integridad de los datos"
+                data = logic.getAllEmprendedores()
+
             return render_template("emprendedor.html", data=data, message=message)
         # Va al form para dar update
         elif formId == 3:
@@ -87,12 +106,20 @@ def emprendedor():
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
             biografia = request.form["biografia"]
-            logic.updateEmprendedor(
-                id, nombre, email, telefono, id_usuario, pais, ciudad, biografia
-            )
-            data = logic.getAllEmprendedores()
-            message = "Se ha modificado con éxito"
-            return render_template("emprendedor.html", data=data)
+
+            try:
+                logic.updateEmprendedor(
+                    id, nombre, email, telefono, id_usuario, pais, ciudad, biografia
+                )
+                data = logic.getAllEmprendedores()
+                message = "Se ha modificado con éxito"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = "No se puede modificar. No existe el id usuario"
+                data = logic.getAllEmprendedores()
+
+            return render_template("emprendedor.html", data=data, message=message)
 
 
 @app.route("/productos")
