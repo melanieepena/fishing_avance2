@@ -43,9 +43,10 @@ def inversionista():
         elif formId == 2:
             id = int(request.form["id"])
             logic.deleteInversionista(id)
-            massage = "Se ha eliminado un usuario de inversionista"
             data = logic.getAllInversionista()
+            message = "Se ha eliminado un usuario de inversionista"
             return render_template("inversionista.html", data=data, message=message)
+
         # Update
         elif formId == 3:
             id = int(request.form["id"])
@@ -61,6 +62,7 @@ def inversionista():
             return render_template(
                 "inversionista.html",
                 data=data,
+                message=message,
                 verdadero=verdadero,
                 id=id,
                 nombre=nombre,
@@ -71,7 +73,7 @@ def inversionista():
                 ciudad=ciudad,
             )
 
-        # Modifica una categoria
+        # Modificar inversionista
         else:
             id = int(request.form["id"])
             nombre = request.form["nombre"]
@@ -82,10 +84,10 @@ def inversionista():
             ciudad = request.form["ciudad"]
 
             logic.updateInversionista(
-                id, nombre, biografia, email, id_usuario, pais, ciudad,
+                id, nombre, biografia, email, id_usuario, pais, ciudad
             )
             data = logic.getAllInversionista()
-            massage = "Se ha modificado el inversionista"
+            message = "Se ha modificado el inversionista"
             return render_template("inversionista.html", data=data, message=message)
 
     # -------------------------------------------------------------------------------------------------------------------

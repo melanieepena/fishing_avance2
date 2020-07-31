@@ -57,7 +57,7 @@ class inversorLogic(Logic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    # Metodo get
+    # Metodo get all
     def getAllInversionista(self):
         dataBase = self.get_databaseXObj()
         sql = "SELECT * FROM fishingdb.inversionista;"
@@ -69,13 +69,18 @@ class inversorLogic(Logic):
     def deleteInversionista(self, id):
         database = self.get_databaseXObj()
         sql = f"delete from fishingdb.inversionista where inversionista.id = '{id}';"
-        rows = database.executeNonQueryRows(sql)
-        return rows
+        row = database.executeNonQueryRows(sql)
+        return row
 
     # Metodo update
     def updateInversionista(self, id, name, bio, email, id_user, country, city):
         database = self.get_databaseXObj()
-        sql = f"update fishingdb.inversionista set inversionista.nombre= '{nombre}',inversionista.biografia= '{biografia}',inversionista.email= '{email}',inversionista.id_usuario= '{id_usuario}',inversionista.pais= '{pais}',inversionista.ciudad= '{ciudad}' where inversionista.id = '{id}';"
-        rows = database.executeNonQueryRows(sql)
-        return rows
-
+        sql = f"update fishingdb.inversionista "
+        +f"set inversionista.nombre= '{name}', "
+        +f"inversionista.biografia= '{bio}', "
+        +f"inversionista.email= '{email}', "
+        +f"inversionista.id_usuario= '{id_user}', "
+        +f"inversionista.pais= '{country}', "
+        +f"inversionista.ciudad= '{city}' where inversionista.id = '{id}';"
+        row = database.executeNonQueryRows(sql)
+        return row

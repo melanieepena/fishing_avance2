@@ -16,7 +16,7 @@
 <form action="/inversionista" method="POST">
     Nombre: <input type="text" name="nombre" id="nombre">
     <br>
-    E-mail: <input type="text" name="email" id="nombre">
+    E-mail: <input type="text" name="email" id="email">
     <br>
     IdUsuario: <input type="text" name="idUsuario" id="idUsuario">
     <br>
@@ -43,11 +43,11 @@
     <tr>
         <th>Id</th>
         <th>Nombre</th>
+        <th>Biografia</th>
+        <th>Email</th>
         <th>Id Usuario</th>
-        <th>E-mail</th>
         <th>Pais</th>
         <th>Ciudad</th>
-        <th>Biofrafia</th>
         <th>Borrar</th>
         <th>Modificar</th>
     </tr>
@@ -56,31 +56,32 @@
     <tr>
         <td>{{registro["id"]}}</td>
         <td>{{registro["nombre"]}}</td>
-        <td>{{registro["idUsuario"]}}</td>
+        <td>{{registro["biografia"]}}</td>
         <td>{{registro["email"]}}</td>
+        <td>{{registro["idUsuario"]}}</td>
         <td>{{registro["pais"]}}</td>
         <td>{{registro["ciudad"]}}</td>
-        <td>{{registro["biografia"]}}</td>
         <td>
 
 
-            <form action="/Inversionista" method="POST">
+            <form action="/inversionista" method="POST">
                 <button type="submit" value="delete">Borrar</button>
                 <input type="hidden" name="formId" id="formId" value="2">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
             </form>
         </td>
         <td>
-            <form action="/Inversionista" method="POST">
+            <form action="/inversionista" method="POST">
                 <button type="submit" value="update">Modificar</button>
                 <input type="hidden" name="formId" id="formId" value="3">
                 <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
                 <input type="hidden" name="nombre" id="nombre" value="{{registro["nombre"]}}">
-                <input type="hidden" name="idUsuario" id="idUsuario" value="{{registro["idUsuario"]}}">
+                <input type="hidden" name="biografia" id="biografia" value="{{registro["biografia"]}}"> 
                 <input type="hidden" name="email" id="email" value="{{registro["email"]}}">
+                <input type="hidden" name="idUsuario" id="idUsuario" value="{{registro["idUsuario"]}}">              
                 <input type="hidden" name="pais" id="pais" value="{{registro["pais"]}}">
                 <input type="hidden" name="ciudad" id="ciudad" value="{{registro["ciudad"]}}">
-                <input type="hidden" name="biografia" id="biografia" value="{{registro["biografia"]}}"> 
+                
             </form>
         </td>
     </tr>
@@ -93,13 +94,14 @@
 <p>Modifica datos del inversionista</p>
 <form action="/Inversionista" method="POST">
     Nombre: <input type="text" name="nombre" id="nombre" value="{{nombre}}"><br><br>
-    Id Usuario: <input type="text" name="idUsuario" id="idUsuario" value="{{idUsuario}}"><br><br>
+    Biografia: <input type="text" name="biografia" id="biografia" value="{{biografia}}"><br><br>
     Email: <input type="text" name="email" id="email" value="{{email}}"> <br><br>
+    Id Usuario: <input type="text" name="idUsuario" id="idUsuario" value="{{idUsuario}}"><br><br>
     Pais: <input type="text" name="pais" id="pais" value="{{pais}}"><br><br>
     Ciudad: <input type="text" name="ciudad" id="ciudad" value="{{ciudad}}"><br><br>
-    Biografia: <input type="text" name="biografia" id="biografia" value="{{biografia}}"><br><br>
     
-    <button type="submit" value="insert">Modificar</button>
+    
+    <button type="submit" value="update">Modificar</button>
     <input type="hidden" name="formId" id="formId" value="4">
     <input type="hidden" name="id" id="id" value="{{id}}">
 </form>
@@ -108,7 +110,6 @@
 
 
 {% endblock body %}
-</body>
 
 </html>
 
