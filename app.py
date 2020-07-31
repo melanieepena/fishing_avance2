@@ -1,4 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
+import mysql.connector
+from flask_mysqldb import MySQL
+from mysql.connector import Error
+
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -27,6 +31,8 @@ def inversionista():
         formId = int(request.form["formId"])
         # Insertar
         if formId == 1:
+
+            # Recoger datos
             nombre = request.form["nombre"]
             biografia = request.form["biografia"]
             email = request.form["email"]
@@ -34,17 +40,36 @@ def inversionista():
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
 
-            logic.insertNewInversor(nombre, biografia, email, id_usuario, pais, ciudad)
-            message = "Se ha insertado un nuevo inversionista"
-            data = logic.getAllInversionista()
+            try:
+                logic.insertNewInversor(
+                    nombre, biografia, email, id_usuario, pais, ciudad
+                )
+                message = "Se ha insertado un nuevo inversionista"
+                data = logic.getAllInversionista()
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = "No se puede insertar. No existe el id usuario"
+                data = logic.getAllInversionista()
+
             return render_template("inversionista.html", data=data, message=message)
 
         # Eliminar
         elif formId == 2:
             id = int(request.form["id"])
-            logic.deleteInversionista(id)
-            data = logic.getAllInversionista()
-            message = "Se ha eliminado un usuario de inversionista"
+
+            try:
+                logic.deleteInversionista(id)
+                data = logic.getAllInversionista()
+                message = "Se ha eliminado un usuario de inversionista"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = (
+                    "No se puede eliminar. Afecta la integridad de la base de datos"
+                )
+                data = logic.getAllInversionista()
+
             return render_template("inversionista.html", data=data, message=message)
 
         # Update
@@ -73,7 +98,7 @@ def inversionista():
                 ciudad=ciudad,
             )
 
-        # Modificar
+        # Modificar inversionista
         else:
             id = int(request.form["id"])
             nombre = request.form["nombre"]
@@ -83,11 +108,18 @@ def inversionista():
             pais = request.form["pais"]
             ciudad = request.form["ciudad"]
 
-            logic.updateInversionista(
-                id, nombre, biografia, email, id_usuario, pais, ciudad
-            )
-            data = logic.getAllInversionista()
-            message = "Se ha modificado el inversionista"
+            try:
+                logic.updateInversionista(
+                    id, nombre, biografia, email, id_usuario, pais, ciudad
+                )
+                data = logic.getAllInversionista()
+                message = "Se ha modificado el inversionista"
+
+            except mysql.connector.Error as error:
+                print("Failed inserting BLOB data into MySQL table {}".format(error))
+                message = "No se puede modificar. No existe el id usuario"
+                data = logic.getAllInversionista()
+
             return render_template("inversionista.html", data=data, message=message)
 
     # -------------------------------------------------------------------------------------------------------------------
