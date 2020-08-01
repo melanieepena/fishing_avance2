@@ -35,6 +35,7 @@ def emprendedor():
 def productos():
     logic = productosLogic()
     datos = logic.getAllProductoLen()
+    message = ""
     if request.method == "GET":
         return render_template("productos.html", datosx=datos, mostrar=False)
 
@@ -97,11 +98,24 @@ def productos():
                     and idEmp != ""
                 ):
                     logic = productosLogic()
-                    logic.insertNewProducto(
-                        nombre, foto, desc, costo, precio, patente, idEmp
+                    try:
+                        logic.insertNewProducto(
+                            nombre, foto, desc, costo, precio, patente, idEmp
+                        )
+                    except mysql.connector.Error as error:
+                        print(
+                            "Failed inserting BLOB data into MySQL table {}".format(
+                                error
+                            )
+                        )
+                        message = (
+                            "No se puede eliminar. Afecta la integridad de los datos"
+                        )
+                    datos = logic.getAllProductoLen()
+                    return render_template(
+                        "productos.html", datosx=datos, mostrar=False, message=message
                     )
-                datos = logic.getAllProductoLen()
-                return render_template("productos.html", datosx=datos, mostrar=False)
+
         return render_template("productos.html", datosx=datos, mostrar=False)
 
 
