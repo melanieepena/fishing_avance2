@@ -1,10 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 from mysql.connector import Error
-<<<<<<< HEAD
-
-=======
->>>>>>> emprendedor
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -525,7 +521,6 @@ def signUPEmprendimiento():
 
 @app.route("/categoria", methods=["GET", "POST"])
 def categoria():
-<<<<<<< HEAD
     logic = CategoriaLogic()
     massage = ""
     verdadero = False
@@ -577,9 +572,6 @@ def categoria():
             data = logic.getAllCategorias()
             massage = "Se ha modificado el usuario"
             return render_template("categoria.html", data=data, massage=massage)
-=======
-    return render_template("emprendimiento.html")
->>>>>>> emprendimiento
 
 
 if __name__ == "__main__":
