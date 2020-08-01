@@ -69,7 +69,6 @@ class emprendimientoLogic(Logic):
         else:
             return None
 
-<<<<<<< HEAD
     def checkEmprendimiento(self, name):
         dataBase = self.get_databaseXObj()
         sql = (
@@ -86,7 +85,7 @@ class emprendimientoLogic(Logic):
             return True
         else:
             return False
-=======
+
     def deleteEmprendimiento(self, id):
         database = self.get_databaseXObj()
         sql = f"delete from fishingdb.emprendimiento where emprendimiento.id = '{id}';"
@@ -118,4 +117,3 @@ class emprendimientoLogic(Logic):
         sql = f"update fishingdb.emprendimiento set emprendimiento.estado= '{estado}',emprendimiento.descripcion= '{descripcion}',emprendimiento.historia= '{historia}', emprendimiento.eslogan= '{eslogan}',emprendimiento.inversion_inicial= '{inversion_inicial}',emprendimiento.fecha_fundacion= '{fecha_fundacion}',emprendimiento.venta_año_anterior= '{venta_año_anterior}',emprendimiento.oferta_porcentaje= '{oferta_porcentaje}',emprendimiento.id_emprendedor= '{id_emprendedor}',emprendimiento.nombre= '{nombre}'  where emprendimiento.id = '{id}';"
         rows = database.executeNonQueryRows(sql)
         return rows
->>>>>>> emprendimiento

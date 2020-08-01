@@ -18,31 +18,17 @@ class emprendedorLogic(Logic):
         ]
 
     def insertNewEmprendedor(
-<<<<<<< HEAD
-        self, name, email, phone, id_user, country, city, biography,
-=======
         self, name, email, phone, id_user, country, city, biografia
->>>>>>> emprendedor
     ):
         database = self.get_databaseXObj()
         sql = (
             "insert into fishingdb.emprendedor (id, nombre, email, telefono, id_usuario, pais, ciudad, biografia) "
-<<<<<<< HEAD
-            + f"values (0, '{name}', '{email}', '{phone}', {id_user},'{country}','{city}','{biography}');"
-=======
             + f"values (0, '{name}', '{email}', '{phone}', {id_user},'{country}','{city}', '{biografia}');"
->>>>>>> emprendedor
         )
         rows = database.executeNonQueryRows(sql)
         return rows
 
-<<<<<<< HEAD
-    def getNewEmprendedor(
-        self, name, email, phone, id_user, country, city, biography,
-    ):
-=======
     def getNewEmprendedor(self, name, email, phone, id_user, country, city, biografia):
->>>>>>> emprendedor
         dataBase = self.get_databaseXObj()
         sql = "select * from fishingdb.emprendedor " + f"where id_usuario = {id_user};"
         data = dataBase.executeQuery(sql)
@@ -59,7 +45,6 @@ class emprendedorLogic(Logic):
                 data_dic["pais"],
                 data_dic["ciudad"],
                 data_dic["biografia"],
-<<<<<<< HEAD
             )
             return empObj
         else:
@@ -77,12 +62,11 @@ class emprendedorLogic(Logic):
                 data_dic["nombre"],
                 data_dic["email"],
                 data_dic["telefono"],
+                data_dic["foto"],
                 data_dic["id_usuario"],
                 data_dic["pais"],
                 data_dic["ciudad"],
                 data_dic["biografia"],
-=======
->>>>>>> emprendedor
             )
             return empObj
         else:
