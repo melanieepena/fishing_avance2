@@ -3,9 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
+    <title>Productos</title>
 </head>
 <body>
+    <h2>Productos</h2>
+    <p>{{message}}</p>
+    
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th> 
+            <th>Foto</th>
+            <th>Descripción</th>
+            <th>Costo Unitario</th>
+            <th>Precio de venta</th>
+            <th>Patente</th>
+            <th>Id Emprendimiento</th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        
+        {% for i in datosx: %}
+        
+            {%set list = (i)%}
+            <tr>
+                {%for count in i%}
+                    <td>{{count}}</td>
+
+                {%endfor%}
+                <form action = "/productos" method = "POST">
+                    <td><input type="submit" id="update" name="update" value="Modificar" action="/productos/Update"></td>
+                    <input type="hidden" id="idColumnaU" name="idColumnaU" value="{{list[0]}}">
+                    <input type="hidden" id="NameU" name="NameU" value="{{list[1]}}">
+                    <input type="hidden" id="fotoU" name="fotoU" value="{{list[2]}}">
+                    <input type="hidden" id="descU" name="descU" value="{{list[3]}}">
+                    <input type="hidden" id="costoU" name="costoU" value="{{list[4]}}">
+                    <input type="hidden" id="precioU" name="precioU" value="{{list[5]}}">
+                    <input type="hidden" id="patenteU" name="patenteU" value="{{list[6]}}">
+                    <input type="hidden" id="idEmpU" name="idEmpU" value="{{list[7]}}">
+                    <input type="hidden" id="formId" name="formId" value="1">
+                </form>
+                <form action = "/productos" method = "POST">
+                    <td><input type="submit" id="delete" name="delete" value="Eliminar" action="/productos/Delete"></td>
+                    <input type="hidden" id="idColumnaD" name="idColumnaD" value="{{list[0]}}">
+                    <input type="hidden" id="formId" name="formId" value="3">
+                </form>
+            </tr>
+            
+        
+        {%endfor%}
+            <form action = "/productos" method = "POST">
+                <tr>
+                    <td></td>
+                    <td><input type="text" id="newName" name="newName"></td>
+                    <td><input type="text" id="newFoto" name="newFoto"></td>
+                    <td><input type="text" id="newDesc" name="newDesc"></td>
+                    <td><input type="text" id="newCosto" name="newCosto"></td>
+                    <td><input type="text" id="newPrecio" name="newPrecio"></td>
+                    <td><input type="text" id="newPatente" name="newPatente"></td>
+                    <td><input type="text" id="newId_emp" name="newId_emp"></td>
+                    <td></td>
+                    <input type="hidden" id="formId" name="formId" value="4">
+                    <td><input type="submit" value = "Insertar "> </td>
+                </tr>
+            </form>
+    </table>
+    {%if mostrar%}
+            <form action = "/productos" method = "POST">
+            <br>
+            <p>Modifica el producto que escogiste</p>
+                <table>
+                    <tr>
+                        
+                        <td>{{idx}}</td>
+                        <td><input type="text" id="nameUp" name="nameUp" value="{{nameUpx}}" ></td>
+                        <td><input type="text" id="fotoUp" name="fotoUp" value="{{fotoUpx}}" ></td>
+                        <td><input type="text" id="descUp" name="descUp" value="{{descUpx}}" ></td>
+                        <td><input type="text" id="costoUp" name="costoUp" value="{{costoUpx}}" ></td>
+                        <td><input type="text" id="precioUp" name="precioUp" value="{{precioUpx}}"></td>
+                        <td><input type="text" id="patenteUp" name="patenteUp" value="{{patenteUpx}}"></td>
+                        <td>{{empex}}</td>
+                        <td></td>
+                        <td><input type="submit" value = "Aceptar Cambios"> </td>
+                        <input type="hidden" id="formId" name="formId" value="2">
+                        <input type="hidden" id="idxForm" name="idxForm" value="{{idx}}">
+                    </tr>
+                </table>
+            </form>
+        {%endif%}
+        <br><br><a href="/">Regresar a inicio</a>
     
 </body>
+
 </html>

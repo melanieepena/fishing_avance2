@@ -82,3 +82,21 @@ class UserLogic(Logic):
             "rol": userObj.rol,
         }
         return dictionary
+
+    def getUserByUser(self, user):
+        dataBase = self.get_databaseXObj()
+        sql = "SELECT * FROM fishingdb.usuario " + f"where usuario.usuario = '{user}';"
+        print(sql)
+        data = dataBase.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        if len(data) > 0:
+            data_dic = data[0]
+            userObj = UserObj(
+                data_dic["id"],
+                data_dic["usuario"],
+                data_dic["password"],
+                data_dic["rol"],
+            )
+            return userObj
+        else:
+            return None

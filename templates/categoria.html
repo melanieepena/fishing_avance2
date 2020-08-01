@@ -1,11 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categorías</title>
+{% endblock head %}
+
+{% block body %}
+<h1>Categorías</h1>
+
+<br><br>
+<p>Inserta una categoría</p>
+<form action="/categoria" method="POST">
+    Categoría: <input type="text" name="categoria" id="categoria">
+    <button type="submit" value="insert">Insertar</button>
+    <input type="hidden" name="formId" id="formId" value="1">
+</form>
+<br><br>
+<p>{{massage}}</p>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Categoría</th>
+        <th>Borrar</th>
+        <th>Modificar</th>
+    </tr>
+
+    {% for registro in data %}
+    <tr>
+        <td>{{registro["id"]}}</td>
+        <td>{{registro["categoria"]}}</td>
+        <td>
+            <form action="/categoria" method="POST">
+                <button type="submit" value="delete">Borrar</button>
+                <input type="hidden" name="formId" id="formId" value="2">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+            </form>
+        </td>
+        <td>
+            <form action="/categoria" method="POST">
+                <button type="submit" value="update">Modificar</button>
+                <input type="hidden" name="formId" id="formId" value="3">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+                <input type="hidden" name="categoria" id="categoria" value="{{registro["categoria"]}}">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+<br><br>
+
+{% if verdadero %}
+<p>Modifica la categoria</p>
+<form action="/categoria" method="POST">
+    Categoría: <input type="text" name="categoria" id="categoria" value="{{categoria}}">
+    <button type="submit" value="insert">Modificar</button>
+    <input type="hidden" name="formId" id="formId" value="4">
+    <input type="hidden" name="id" id="id" value="{{id}}">
+</form>
+<br><br>
+{% endif %}
+
+<p>
+    <a href="/">Regresar</a>
+</p>
+{% endblock body %}
 </body>
+
 </html>
