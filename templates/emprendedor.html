@@ -1,11 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Emprendedor</title>
 </head>
-<body>
+{% block body %}
+<h1>Emprendedor</h1>
+
+<br><br>
+
+<p>Inserta un emprendedor</p>
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>E-mail</th>
+        <th>Telefono</th>
+        <th>Id usuario</th>
+        <th>Pais</th>
+        <th>Ciudad</th>
+        <th>Biografia</th>
+        <th>Insertar</th>
+    </tr>
+    <tr>
+        <td>Id</td>
+        <form action="/emprendedor" method="POST">
+
+            <td><input type="text" name="nombre" id="nombre"></td>
+            <td><input type="text" name="email" id="email"></td>
+            <td><input type="text" name="telefono" id="telefono"></td>
+            <td><input type="text" name="id_usuario" id="id_usuario"></td>
+            <td><input type="text" name="pais" id="pais"></td>
+            <td><input type="text" name="ciudad" id="ciudad"></td>
+            <td><input type="text" name="biografia" id="biografia"></td>
+            <td>
+                <button type="submit" value="insert">Insertar</button>
+                <input type="hidden" name="formId" id="formId" value="1">
+            </td>
+
+        </form>
+    </tr>
+</table>
+<br><br>
+<p>{{message}}</p>
+<br>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>E-mail</th>
+        <th>Telefono</th>
+        <th>Id usuario</th>
+        <th>Pais</th>
+        <th>Ciudad</th>
+        <th>Biografia</th>
+        <th>Borrar</th>
+        <th>Modificar</th>
+    </tr>
+
+    {% for registro in data %}
+    <tr>
+        <td>{{registro["id"]}}</td>
+        <td>{{registro["nombre"]}}</td>
+        <td>{{registro["email"]}}</td>
+        <td>{{registro["telefono"]}}</td>
+        <td>{{registro["id_usuario"]}}</td>
+        <td>{{registro["pais"]}}</td>
+        <td>{{registro["ciudad"]}}</td>
+        <td>{{registro["biografia"]}}</td>
+        <td>
+            <form action="/emprendedor" method="POST">
+                <button type="submit" value="delete">Borrar</button>
+                <input type="hidden" name="formId" id="formId" value="2">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+            </form>
+        </td>
+        <td>
+            <form action="/emprendedor" method="POST">
+                <button type="submit" value="update">Modificar</button>
+                <input type="hidden" name="formId" id="formId" value="3">
+                <input type="hidden" name="id" id="id" value="{{registro["id"]}}">
+                <input type="hidden" name="nombre" id="nombre" value="{{registro["nombre"]}}">
+                <input type="hidden" name="email" id="email" value="{{registro["email"]}}">
+                <input type="hidden" name="telefono" id="telefono" value="{{registro["telefono"]}}">
+                <input type="hidden" name="id_usuario" id="id_usuario" value="{{registro["id_usuario"]}}">
+                <input type="hidden" name="pais" id="pais" value="{{registro["pais"]}}">
+                <input type="hidden" name="ciudad" id="ciudad" value="{{registro["ciudad"]}}">
+                <input type="hidden" name="biografia" id="biografia" value="{{registro["biografia"]}}">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+<br><br>
+{% if verdadero %}
+
+<p>Modifica el emprendedor</p>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>E-mail</th>
+        <th>Telefono</th>
+        <th>Id usuario</th>
+        <th>Pais</th>
+        <th>Ciudad</th>
+        <th>Biografia</th>
+        <th>Modificar</th>
+        <th>Cancelar</th>
+    </tr>
+    <tr>
+        <td>Id</td>
+        <form action="/emprendedor" method="POST">
     
-</body>
+            <td><input type="text" name="nombre" id="nombre" value="{{nombre}}"></td>
+            <td><input type="text" name="email" id="email" value="{{email}}"></td>
+            <td><input type="text" name="telefono" id="telefono" value="{{telefono}}"></td>
+            <td><input type="text" name="id_usuario" id="id_usuario" value="{{id_usuario}}"></td>
+            <td><input type="text" name="pais" id="pais" value="{{pais}}"></td>
+            <td><input type="text" name="ciudad" id="ciudad" value="{{ciudad}}"></td>
+            <td><input type="text" name="biografia" id="biografia" value="{{biografia}}"></td>
+            <td>
+                <button type="submit" value="update">Modificar</button>
+                <input type="hidden" name="formId" id="formId" value="4">
+                <input type="hidden" name="id" id="id" value="{{id}}">
+            </td>
+    
+        </form>
+    </tr>
+    <td>
+        <form action="/emprendedor" method="GET">
+            <button type="submit" value="cancel">X</button>
+        </form>
+    </td>
+
+</table>
+{% endif %}
+
+<p>
+    <a href="/">Regresar</a>
+</p>
+{% endblock body %}
+
 </html>

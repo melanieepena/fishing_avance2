@@ -10,6 +10,7 @@ class emprendedorLogic(Logic):
             "nombre",
             "email",
             "telefono",
+            "foto",
             "id_usuario",
             "pais",
             "ciudad",
@@ -17,19 +18,31 @@ class emprendedorLogic(Logic):
         ]
 
     def insertNewEmprendedor(
+<<<<<<< HEAD
         self, name, email, phone, id_user, country, city, biography,
+=======
+        self, name, email, phone, id_user, country, city, biografia
+>>>>>>> emprendedor
     ):
         database = self.get_databaseXObj()
         sql = (
             "insert into fishingdb.emprendedor (id, nombre, email, telefono, id_usuario, pais, ciudad, biografia) "
+<<<<<<< HEAD
             + f"values (0, '{name}', '{email}', '{phone}', {id_user},'{country}','{city}','{biography}');"
+=======
+            + f"values (0, '{name}', '{email}', '{phone}', {id_user},'{country}','{city}', '{biografia}');"
+>>>>>>> emprendedor
         )
         rows = database.executeNonQueryRows(sql)
         return rows
 
+<<<<<<< HEAD
     def getNewEmprendedor(
         self, name, email, phone, id_user, country, city, biography,
     ):
+=======
+    def getNewEmprendedor(self, name, email, phone, id_user, country, city, biografia):
+>>>>>>> emprendedor
         dataBase = self.get_databaseXObj()
         sql = "select * from fishingdb.emprendedor " + f"where id_usuario = {id_user};"
         data = dataBase.executeQuery(sql)
@@ -41,10 +54,12 @@ class emprendedorLogic(Logic):
                 data_dic["nombre"],
                 data_dic["email"],
                 data_dic["telefono"],
+                data_dic["foto"],
                 data_dic["id_usuario"],
                 data_dic["pais"],
                 data_dic["ciudad"],
                 data_dic["biografia"],
+<<<<<<< HEAD
             )
             return empObj
         else:
@@ -66,7 +81,35 @@ class emprendedorLogic(Logic):
                 data_dic["pais"],
                 data_dic["ciudad"],
                 data_dic["biografia"],
+=======
+>>>>>>> emprendedor
             )
             return empObj
         else:
             return None
+
+    def getAllEmprendedores(self):
+        dataBase = self.get_databaseXObj()
+        sql = "select * from fishingdb.emprendedor;"
+        data = dataBase.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        return data
+
+    def deleteEmprendedor(self, id):
+        database = self.get_databaseXObj()
+        sql = f"delete from fishingdb.emprendedor where emprendedor.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows
+
+    def updateEmprendedor(
+        self, id, name, email, phone, id_user, country, city, biografia
+    ):
+        database = self.get_databaseXObj()
+        sql = (
+            "update fishingdb.emprendedor "
+            + f"set emprendedor.nombre = '{name}', emprendedor.email = '{email}', emprendedor.telefono = '{phone}', emprendedor.id_usuario = '{id_user}', "
+            + f"emprendedor.pais = '{country}', emprendedor.ciudad = '{city}', emprendedor.biografia = '{biografia}' "
+            + f"where emprendedor.id = '{id}';"
+        )
+        rows = database.executeNonQueryRows(sql)
+        return rows
