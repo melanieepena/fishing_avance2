@@ -1,12 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
-<<<<<<< HEAD
-from flask_mysqldb import MySQL
 from mysql.connector import Error
 
-=======
-from mysql.connector import Error
->>>>>>> fundadores
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
