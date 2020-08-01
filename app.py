@@ -6,14 +6,11 @@ from userObj import UserObj
 from inversorLogic import inversorLogic
 from inversorObj import inversorObj
 from emprendedorLogic import emprendedorLogic
-<<<<<<< HEAD
 from fundadorLogic import fundadorLogic
 from emprendimientoLogic import emprendimientoLogic
-=======
 from categoriaLogic import CategoriaLogic
 from productosObj import productosObj
 from productosLogic import productosLogic
->>>>>>> categoria
 
 app = Flask(__name__)
 app.secret_key = "ILoveFishing"
