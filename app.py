@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 from mysql.connector import Error
-<<<<<<< HEAD
 
-=======
->>>>>>> emprendimiento
 from userLogic import UserLogic
 from userObj import UserObj
 from inversorLogic import inversorLogic
@@ -12,12 +9,9 @@ from inversorObj import inversorObj
 from emprendedorLogic import emprendedorLogic
 from fundadorLogic import fundadorLogic
 from emprendimientoLogic import emprendimientoLogic
-<<<<<<< HEAD
 from categoriaLogic import CategoriaLogic
 from productosObj import productosObj
 from productosLogic import productosLogic
-=======
->>>>>>> emprendimiento
 
 app = Flask(__name__)
 app.secret_key = "ILoveFishing"
