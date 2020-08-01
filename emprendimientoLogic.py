@@ -21,31 +21,31 @@ class emprendimientoLogic(Logic):
 
     def insertNewEmprendimiento(
         self,
-        status,
-        desc,
-        history,
-        slogan,
-        inv_inic,
-        fundationDate,
-        sales_prevYear,
-        offer,
-        id_emp,
-        name,
+        estado,
+        descripcion,
+        historia,
+        eslogan,
+        inversion_inicial,
+        fecha_fundacion,
+        venta_año_anterior,
+        oferta_porcentaje,
+        id_emprendedor,
+        nombre,
     ):
         database = self.get_databaseXObj()
         sql = (
             "insert into fishingdb.emprendimiento (id, estado, descripcion, historia, eslogan, inversion_inicial, fecha_fundacion, venta_año_anterior, "
             + f"oferta_porcentaje, id_emprendedor, nombre) "
-            + f"values (0, '{status}', '{desc}', '{history}', {slogan}, {inv_inic},{fundationDate},{sales_prevYear},'{offer}','{id_emp}','{name}');"
+            + f"values (0, '{estado}', '{descripcion}', '{historia}', '{eslogan}', '{inversion_inicial}','{fecha_fundacion}','{venta_año_anterior}','{oferta_porcentaje}','{id_emprendedor}','{nombre}');"
         )
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    def getEmprendimientoByName(self, name):
+    def getEmprendimientoByName(self, nombre):
         dataBase = self.get_databaseXObj()
         sql = (
             "SELECT * FROM fishingdb.emprendimiento "
-            + f"where emprendimiento.nombre = '{name}';"
+            + f"where emprendimiento.nombre = '{nombre}';"
         )
         print(sql)
         data = dataBase.executeQuery(sql)
@@ -69,6 +69,7 @@ class emprendimientoLogic(Logic):
         else:
             return None
 
+<<<<<<< HEAD
     def checkEmprendimiento(self, name):
         dataBase = self.get_databaseXObj()
         sql = (
@@ -85,3 +86,36 @@ class emprendimientoLogic(Logic):
             return True
         else:
             return False
+=======
+    def deleteEmprendimiento(self, id):
+        database = self.get_databaseXObj()
+        sql = f"delete from fishingdb.emprendimiento where emprendimiento.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows
+
+    def getAllEmprendimientoLen(self):
+        dataBase = self.get_databaseXObj()
+        sql = "SELECT * FROM fishingdb.emprendimiento;"
+        data = dataBase.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        return data
+
+    def updateEmprendimiento(
+        self,
+        id,
+        estado,
+        descripcion,
+        historia,
+        eslogan,
+        inversion_inicial,
+        fecha_fundacion,
+        venta_año_anterior,
+        oferta_porcentaje,
+        id_emprendedor,
+        nombre,
+    ):
+        database = self.get_databaseXObj()
+        sql = f"update fishingdb.emprendimiento set emprendimiento.estado= '{estado}',emprendimiento.descripcion= '{descripcion}',emprendimiento.historia= '{historia}', emprendimiento.eslogan= '{eslogan}',emprendimiento.inversion_inicial= '{inversion_inicial}',emprendimiento.fecha_fundacion= '{fecha_fundacion}',emprendimiento.venta_año_anterior= '{venta_año_anterior}',emprendimiento.oferta_porcentaje= '{oferta_porcentaje}',emprendimiento.id_emprendedor= '{id_emprendedor}',emprendimiento.nombre= '{nombre}'  where emprendimiento.id = '{id}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows
+>>>>>>> emprendimiento
